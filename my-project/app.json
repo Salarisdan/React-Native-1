@@ -23,8 +23,13 @@
         "backgroundColor": "#ffffff"
       }
     },
+    "packagerOpts": {
+      "sourceExts": [ "js", "json", "ts", "tsx", "jsx", "vue"],
+      "transformer": "node_modules/react-native-typescript-transformer/index.js"
+      },
     "web": {
       "favicon": "./assets/favicon.png"
     }
+    
   }
 }
