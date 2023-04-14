@@ -1,57 +1,57 @@
-import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, Button, Keyboard } from 'react-native';
+import React, { Component } from 'react';
+import { View, TextInput, Button, Keyboard } from 'react-native';
 
-const RegistrationScreen = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+class RegistrationScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      email: '',
+      password: ''
+    };
+  }
 
-  const handleFormSubmit = () => {
-    console.log('Name:', name);
-    console.log('Email:', email);
-    console.log('Password:', password);
-  };
+  handleNameChange = (name) => {
+    this.setState({ name });
+  }
 
-  return (
-    <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder="Name"
-        onChangeText={setName}
-        value={name}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        onChangeText={setEmail}
-        value={email}
-        keyboardType="email-address"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        onChangeText={setPassword}
-        value={password}
-        secureTextEntry
-      />
-      <Button title="Submit" onPress={handleFormSubmit} />
-    </View>
-  );
-};
+  handleEmailChange = (email) => {
+    this.setState({ email });
+  }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  input: {
-    width: '80%',
-    marginBottom: 10,
-    padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-  },
-});
+  handlePasswordChange = (password) => {
+    this.setState({ password });
+  }
+
+  handleSubmit = () => {
+    const { name, email, password } = this.state;
+    console.log(`Name: ${name}, Email: ${email}, Password: ${password}`);
+    Keyboard.dismiss();
+  }
+
+  render() {
+    return (
+      <View>
+        <TextInput
+          placeholder="Name"
+          value={this.state.name}
+          onChangeText={this.handleNameChange}
+        />
+        <TextInput
+          placeholder="Email"
+          value={this.state.email}
+          onChangeText={this.handleEmailChange}
+        />
+        <TextInput
+          placeholder="Password"
+          value={this.state.password}
+          onChangeText={this.handlePasswordChange}
+          secureTextEntry={true}
+        />
+        <Button title="Submit" onPress={this.handleSubmit} />
+      </View>
+    );
+  }
+}
 
 export default RegistrationScreen;
